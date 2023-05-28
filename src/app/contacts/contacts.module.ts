@@ -6,6 +6,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ContactAddComponent } from './contact-add/contact-add.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDividerModule} from '@angular/material/divider';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     SharedModule,
     MatIconModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    RouterModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    ReactiveFormsModule
   ],
   exports: [
   ]

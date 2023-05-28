@@ -1,1 +1,35 @@
-<p>Piotr Kania</p>
+<app-header>
+    <span content>Dodawanie nowego kontaktu</span>
+</app-header>
+
+<form [formGroup]="addForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Nazwisko</mat-label>
+        <input formControlName="surname" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Imię</mat-label>
+        <input formControlName="firstName" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Nr telefonu</mat-label>
+        <input formControlName="phoneNumber" matInput maxlength="8">
+    </mat-form-field>
+    <button (click)="addForm.reset()" mat-stroked-button color="warn">
+        <mat-icon>delete</mat-icon> Usuń
+    </button>
+    <button (click)="saveContact()" [disabled]="addForm.invalid" mat-stroked-button color="primary">
+        <mat-icon>save</mat-icon> Zapisz
+    </button>
+</form>
+<mat-divider></mat-divider>
+<button [routerLink]="['/contacts-list']" mat-stroked-button color="accent"><mat-icon>arrow_back</mat-icon> Wstecz</button>
+<pre>
+    {{ addForm.value | json }}
+</pre>
+<pre>
+    {{ addForm.invalid | json }}
+</pre>
+<pre>
+    {{ addForm.valid | json }}
+</pre>

@@ -18,5 +18,9 @@ export class ContactsService {
   removeContact(id: number): Observable<any> {
     return this.httpClient.delete(`${this.baseApiUrl}/contact/${id}`);
   } 
+
+  addContact(data: object): Observable<any> {
+    return this.httpClient.post(`${this.baseApiUrl}/contact/add`, data);
+  }
   
 }
