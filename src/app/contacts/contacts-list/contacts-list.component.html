@@ -23,6 +23,9 @@
                 <button (click)="delContact(contact.id)" mat-mini-fab color="warn">
                     <mat-icon>delete</mat-icon>
                 </button>
+                <button [routerLink]="['/contact-add', contact.id]" mat-mini-fab color="accent">
+                    <mat-icon>edit</mat-icon>
+                </button>
             </td>
         </tr>
     </tbody>

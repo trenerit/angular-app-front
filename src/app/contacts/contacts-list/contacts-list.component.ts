@@ -26,7 +26,6 @@ export class ContactsListComponent implements OnInit {
 
   getContacts(): void {
     const mySub = this.contactsService.getContactsService().subscribe(res => {
-      console.log(res);
       this.contacts = res;
     });
     this.sub.add(mySub);
@@ -34,7 +33,6 @@ export class ContactsListComponent implements OnInit {
 
   delContact(id: number) {
     const conf = confirm('Czy na 100% chcesz usunąć ten wpis?');
-    // console.log(conf);
     if(conf) {
       const mySub = this.contactsService.removeContact(id).subscribe(res => {
 

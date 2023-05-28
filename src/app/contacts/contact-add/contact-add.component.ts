@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ContactsService } from '../contacts.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-add',
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ContactAddComponent implements OnInit{
 
+  protected id = this.route.snapshot.params['id'];
+
   protected addForm: any = this.fb.group({});
   
   private sub = new Subscription;
@@ -18,10 +20,16 @@ export class ContactAddComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private contactsService: ContactsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) {}
 
   ngOnInit(): void {
+
+    if(this.id) {
+      this.getContact();
+    }
+
     const surnamePattern = '^[A-ż]{3,20}$';
     const firstNamePattern = '^[A-ż]{3,20}$';
     const phoneNumberPattern = '^[0-9]{8}';
@@ -36,6 +44,24 @@ export class ContactAddComponent implements OnInit{
 
   saveContact(): void {
     const mySub = this.contactsService.addContact(this.addForm.value).subscribe(res => {
+      this.router.navigate(['/contacts-list']);
+    });
+    this.sub.add(mySub);
+  }
+
+  getContact(): void {
+    const mySub = this.contactsService.getContact(this.id).subscribe(res => {
+      this.addForm.patchValue({
+        surname: res[0].surname,
+        firstName: res[0].firstName,
+        phoneNumber: res[0].phoneNumber
+      })
+    });
+    this.sub.add(mySub);
+  }
+  
+  modContact(): void {
+    const mySub = this.contactsService.updateContact(this.id, this.addForm.value).subscribe(res => {
       this.router.navigate(['/contacts-list']);
     });
     this.sub.add(mySub);
