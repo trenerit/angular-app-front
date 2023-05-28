@@ -9,6 +9,7 @@
             <th>Nazwisko</th>
             <th>Imię</th>
             <th>Nr telefonu</th>
+            <th>Opcje</th>
         </tr>
     </thead>
     <tbody>
@@ -17,10 +18,20 @@
             <td>{{contact.surname}}</td>
             <td>{{contact.firstName}}</td>
             <td>{{contact.phoneNumber}}</td>
+            <td>
+                <!-- <button type="button" class="btn btn-danger">Danger</button> -->
+                <button (click)="delContact(contact.id)" mat-mini-fab color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
         </tr>
     </tbody>
 
 </table>
+
+<button mat-fab color="primary" matTooltip="Dodaj nowy kontakt">
+    <mat-icon>add</mat-icon>
+</button>
 
 <ng-template #noContactsAlert>
     <p class="no-contacts">W tym momencie brak danych...</p>

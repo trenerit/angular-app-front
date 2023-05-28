@@ -7,10 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class ContactsService {
 
+  private baseApiUrl = 'http://contactsapi.loc';
+
   constructor(private httpClient: HttpClient) {}
 
   getContactsService(): Observable<any> {
-    return this.httpClient.get('http://contactsapi.loc/contacts');
+    return this.httpClient.get(`${this.baseApiUrl}/contacts`);
   }
+
+  removeContact(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseApiUrl}/contact/${id}`);
+  } 
   
 }
